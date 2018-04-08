@@ -4,10 +4,13 @@ import RPi.GPIO as GPIO
 import pygame.mixer
 #hello
 
+#Buffer for the buzzer to prevent delay
 pygame.mixer.pre_init(44100, -16, 2, 2048)
 pygame.mixer.init()   
 pygame.init()
 
+#Referring to GPIO pins by the Broacom SOC Channel number
+#Not by the pin position on the board. 
 GPIO.setmode(GPIO.BCM)
 
 
@@ -22,6 +25,7 @@ BLANK = '.'
 XMARGIN = int((WIDTH - BOARDWIDTH * BOXSIZE) / 2)
 TOPMARGIN = HEIGHT - (BOARDHEIGHT * BOXSIZE) - 5
 
+#Color codes declared
 WHITE       = (255, 255, 255)
 GRAY        = (185, 185, 185)
 BLACK       = (  0,   0,   0)
@@ -41,6 +45,7 @@ BORDERCOLOR = ( 244, 246, 247 )
 BGCOLOR = BLACK
 TEXTCOLOR = WHITE
 TEXTSHADOWCOLOR = GRAY
+#The display dimensions
 XAxis = 300
 YAxis = 200
 DISPLAYSURF = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -78,7 +83,7 @@ def main():
     background_color = (46, 64, 83)
     (WIDTH, HEIGHT) = (1240, 760)
 
-    # initialize the DISPLAYSURF
+    # initialize the DISPLAYSURF, which is the game screen 
     DISPLAYSURF = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption('Game')
     DISPLAYSURF.fill(background_color)
@@ -98,6 +103,7 @@ def main():
     #pygame.draw.ellipse(DISPLAYSURF, RED, [300, 10, 50, 20]) 
 ##    pygame.display.flip() 
 
+#The game runs on the concept of game states 
     running = True
     game_state = 0
     category = ""
